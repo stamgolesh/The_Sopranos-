@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הסופרנוס — המדריך המלא</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --border: #e8e4df;
+  --text: #1a1a1a;
+  --text-muted: #777;
+  --accent: #8b1a1a;
+  --accent-light: #f5eeee;
+  --nav-bg: #1a1a1a;
+  --nav-text: #f0ede8;
+}
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  direction: rtl;
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: #fff; }
+
+/* HERO */
+.hero {
+  background: var(--nav-bg);
+  color: #fff;
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+  border-bottom: 3px solid var(--accent);
+}
+
+.hero-tag {
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.hero-sub {
+  font-size: 1.1rem;
+  color: #aaa;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+/* MAIN */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+}
+
+/* ABOUT */
+.about-text {
+  font-size: 1rem;
+  color: #333;
+  max-width: 700px;
+}
+
+/* CREATORS */
+.creators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.creator-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.creator-card:hover { border-color: var(--accent); }
+
+.creator-role {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3rem;
+}
+
+.creator-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.creator-note {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+/* CAST */
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.cast-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: border-color 0.2s;
+}
+
+.cast-card:hover { border-color: var(--accent); }
+
+.cast-initial {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cast-info { flex: 1; }
+
+.cast-character {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.cast-actor {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.cast-desc {
+  font-size: 0.82rem;
+  color: #555;
+  margin-top: 0.3rem;
+}
+
+/* SEASONS */
+.seasons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.season-row {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.season-row:hover { border-color: var(--accent); }
+
+.season-num {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent);
+  min-width: 2rem;
+  text-align: center;
+}
+
+.season-info { flex: 1; }
+
+.season-title { font-weight: 600; font-size: 0.95rem; }
+
+.season-meta {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.season-desc {
+  font-size: 0.88rem;
+  color: #444;
+  margin-top: 0.3rem;
+}
+
+/* TRIVIA */
+.trivia-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.trivia-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-right: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.25rem;
+  font-size: 0.93rem;
+  color: #333;
+}
+
+/* FOOTER */
+footer {
+  background: var(--nav-bg);
+  color: #666;
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.82rem;
+  margin-top: 4rem;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">הסופרנוס</a>
+  <ul class="nav-links">
+    <li><a href="#about">על הסדרה</a></li>
+    <li><a href="#creators">יוצרים</a></li>
+    <li><a href="#cast">שחקנים</a></li>
+    <li><a href="#seasons">עונות</a></li>
+    <li><a href="#trivia">טריוויה</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">המדריך המלא בעברית</div>
+  <h1>הסופרנוס</h1>
+  <p class="hero-sub">הסדרה שהגדירה מחדש את הטלוויזיה האמריקאית — כל מה שרצית לדעת</p>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">6</span>
+      <span class="stat-label">עונות</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">86</span>
+      <span class="stat-label">פרקים</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">1999</span>
+      <span class="stat-label">שנת הקמה</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">21</span>
+      <span class="stat-label">פרסי אמי</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <section class="section" id="about">
+    <h2 class="section-title">על הסדרה</h2>
+    <p class="about-text">
+      הסופרנוס היא סדרת דרמה פשע אמריקאית שיצר דייוויד צ'ייס, ושודרה בערוץ HBO בין השנים 1999 ל-2007.
+      הסדרה עוקבת אחרי טוני סופרנו, ראש משפחת פשע איטלקית-אמריקאית מניו ג'רזי, המתמודד בו זמנית עם ניהול כוח אדם בעולם הפשע ועם חיי משפחה סבוכים.
+      על רקע זה, טוני מתחיל לפקוד פסיכיאטרית — מה שמאפשר לסדרה לצלול לעומק נפשו.
+      הסופרנוס נחשבת לאחת הסדרות הטובות שנוצרו, וזכתה ב-21 פרסי אמי ושינתה את פני הטלוויזיה האמריקאית לנצח.
+    </p>
+  </section>
+
+  <section class="section" id="creators">
+    <h2 class="section-title">יוצרים ויוצרות</h2>
+    <div class="creators-grid">
+      <div class="creator-card">
+        <div class="creator-role">יוצר</div>
+        <div class="creator-name">דייוויד צ'ייס</div>
+        <div class="creator-note">כתב ויצר את הסדרה. נחשב לאחד הכותבים הגדולים בתולדות הטלוויזיה.</div>
+      </div>
+      <div class="creator-card">
+        <div class="creator-role">מפיק מנהל</div>
+        <div class="creator-name">בראד גריי</div>
+        <div class="creator-note">מפיק בכיר שליווה את הפרויקט מהתחלה.</div>
+      </div>
+      <div class="creator-card">
+        <div class="creator-role">במאי ראשי</div>
+        <div class="creator-name">טים ון פטן</div>
+        <div class="creator-note">ביים עשרות פרקים, כולל את הפרק האחרון.</div>
+      </div>
+      <div class="creator-card">
+        <div class="creator-role">מלחין</div>
+        <div class="creator-name">ג'ק לויסקי</div>
+        <div class="creator-note">אחראי על המוזיקה המיוחדת של הסדרה.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cast">
+    <h2 class="section-title">שחקנים ראשיים</h2>
+    <div class="cast-grid">
+      <div class="cast-card">
+        <div class="cast-initial">ג</div>
+        <div class="cast-info">
+          <div class="cast-character">טוני סופרנו</div>
+          <div class="cast-actor">ג'יימס גנדולפיני</div>
+          <div class="cast-desc">ראש משפחת פשע מניו ג'רזי, מתמודד עם חרדות ודיכאון.</div>
+        </div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-initial">א</div>
+        <div class="cast-info">
+          <div class="cast-character">קרמלה סופרנו</div>
+          <div class="cast-actor">אידי פאלקו</div>
+          <div class="cast-desc">אשתו של טוני, מנסה לשמור על מסכת חיים תקינים.</div>
+        </div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-initial">ל</div>
+        <div class="cast-info">
+          <div class="cast-character">ד"ר ג'ניפר מלפי</div>
+          <div class="cast-actor">לורריין בראקו</div>
+          <div class="cast-desc">הפסיכיאטרית של טוני, מרכז הסצנות הפנימיות של הסדרה.</div>
+        </div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-initial">מ</div>
+        <div class="cast-info">
+          <div class="cast-character">קריסטופר מולטיסנטי</div>
+          <div class="cast-actor">מייקל אימפריולי</div>
+          <div class="cast-desc">אחיינו של טוני, שאפתן שרוצה להגיע לפסגה.</div>
+        </div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-initial">ס</div>
+        <div class="cast-info">
+          <div class="cast-character">סילביו דנטה</div>
+          <div class="cast-actor">סטיב ון זאנדט</div>
+          <div class="cast-desc">יד ימינו של טוני, מנהל המועדון.</div>
+        </div>
+      </div>
+      <div class="cast-card">
+        <div class="cast-initial">ט</div>
+        <div class="cast-info">
+          <div class="cast-character">פאולי וולנוצ'י</div>
+          <div class="cast-actor">טוני סיריקו</div>
+          <div class="cast-desc">חבר הכנופיה הוותיק, ידוע בהומור השחור שלו.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="seasons">
+    <h2 class="section-title">עונות</h2>
+    <div class="seasons-list">
+      <div class="season-row">
+        <div class="season-num">1</div>
+        <div class="season-info">
+          <div class="season-title">עונה ראשונה</div>
+          <div class="season-meta">1999 · 13 פרקים</div>
+          <div class="season-desc">טוני סופרנו מתחיל לפקוד פסיכיאטרית לאחר שעובר התעלפות. במקביל, המתח עם דודו ג'וניור מסלים.</div>
+        </div>
+      </div>
+      <div class="season-row">
+        <div class="season-num">2</div>
+        <div class="season-info">
+          <div class="season-title">עונה שנייה</div>
+          <div class="season-meta">2000 · 13 פרקים</div>
+          <div class="season-desc">חזרת ריצ'י אפריל מהכלא מסבכת את מבנה הכוחות. קריסטופר שוקל לפרוש.</div>
+        </div>
+      </div>
+      <div class="season-row">
+        <div class="season-num">3</div>
+        <div class="season-info">
+          <div class="season-title">עונה שלישית</div>
+          <div class="season-meta">2001 · 13 פרקים</div>
+          <div class="season-desc">הגעת ראלף צ'יפרטו מחוללת שינויים. עונה נחשבת לאחת החזקות.</div>
+        </div>
+      </div>
+      <div class="season-row">
+        <div class="season-num">4</div>
+        <div class="season-info">
+          <div class="season-title">עונה רביעית</div>
+          <div class="season-meta">2002 · 13 פרקים</div>
+          <div class="season-desc">עלייתו וירידתו של ראלף. המתח עם משפחת לואפטה מגיע לשיא.</div>
+        </div>
+      </div>
+      <div class="season-row">
+        <div class="season-num">5</div>
+        <div class="season-info">
+          <div class="season-title">עונה חמישית</div>
+          <div class="season-meta">2004 · 13 פרקים</div>
+          <div class="season-desc">טוני בי, בן דודו של טוני, יוצר סיבוכים. נחשבת לשיא הסדרה בעיני רבים.</div>
+        </div>
+      </div>
+      <div class="season-row">
+        <div class="season-num">6</div>
+        <div class="season-info">
+          <div class="season-title">עונה שישית</div>
+          <div class="season-meta">2006–2007 · 21 פרקים</div>
+          <div class="season-desc">העונה האחרונה, שודרה בשני חלקים. הסתיימה בסצנה הסופית המפורסמת שעוררה ויכוחים עד היום.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="trivia">
+    <h2 class="section-title">טריוויה ועובדות מיוחדות</h2>
+    <div class="trivia-list">
+      <div class="trivia-item">ג'יימס גנדולפיני קיבל שכר של מיליון דולר לפרק בעונות האחרונות — שיא שהיה חסר תקדים בטלוויזיה בזמנו.</div>
+      <div class="trivia-item">שיר הפתיחה, "Woke Up This Morning" של אלבמה 3, לא נכתב במיוחד לסדרה אלא שודר ברדיו ואחד ממפיקי הסדרה שמע אותו בנסיעה.</div>
+      <div class="trivia-item">דייוויד צ'ייס סירב לחשוף את הפרשנות הרשמית שלו לסצנה האחרונה שנים רבות לאחר שידור הסיום.</div>
+      <div class="trivia-item">סטיב ון זאנדט, שגילם את סילביו, הוא גיטריסט הלהקה של ברוס ספרינגסטין ולא היה שחקן מקצועי לפני הסדרה.</div>
+      <div class="trivia-item">הסדרה צולמה כמעט כולה בניו ג'רזי ממש, לא בסטודיו — כולל הבית של משפחת סופרנו שהוא בית פרטי אמיתי.</div>
+      <div class="trivia-item">HBO דחתה בתחילה את הפיילוט, ורק לאחר שדייוויד צ'ייס הסכים לשינויים מסוימים הוזמנה העונה הראשונה.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  כל הזכויות שמורות · מידע מבוסס על מקורות ציבוריים
+</footer>
+
+</body>
+</html>
